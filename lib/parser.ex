@@ -8,14 +8,19 @@ defmodule Sitex.Parser do
     |> Earmark.as_html!(earmark_option())
   end
 
-  def parse_eex(eex_text) do
+  def parse_eex(eex_text, assigns \\ []) do
     eex_text
-    |> EEx.eval_string(assigns: [title: "Hola Mundo!"])
+    |> EEx.eval_string(assigns: assigns)
   end
 
-  def render(file_name) do
+  def render(file_name, assigns \\ []) do
     {:ok, file_content} = File.read(file_name)
-    parse_eex(file_content)
+    parse_eex(file_content, assigns)
+  end
+
+  def render_md(file_name) do
+    {:ok, file_content} = File.read(file_name)
+    markdown(file_content)
   end
 
   defp earmark_option do
