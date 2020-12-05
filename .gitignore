@@ -25,4 +25,4 @@ sitex-*.tar
 .elixir_ls
 
 # Ignore generated web
-/site/
+/public/

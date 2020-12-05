@@ -3,24 +3,26 @@ defmodule Sitex.Parser do
   Documentation for `Sitex`.
   """
 
-  def markdown(markdown_text) do
+  def render(file_name, file_type \\ "eex", assigns \\ [])
+
+  def render(file_name, _ = "eex", assigns) do
+    {:ok, file_content} = File.read(file_name)
+    eex(file_content, assigns)
+  end
+
+  def render(file_name, _ = "md", _) do
+    {:ok, file_content} = File.read(file_name)
+    markdown(file_content)
+  end
+
+  defp markdown(markdown_text) do
     markdown_text
     |> Earmark.as_html!(earmark_option())
   end
 
-  def parse_eex(eex_text, assigns \\ []) do
+  defp eex(eex_text, assigns) do
     eex_text
     |> EEx.eval_string(assigns: assigns)
-  end
-
-  def render(file_name, assigns \\ []) do
-    {:ok, file_content} = File.read(file_name)
-    parse_eex(file_content, assigns)
-  end
-
-  def render_md(file_name) do
-    {:ok, file_content} = File.read(file_name)
-    markdown(file_content)
   end
 
   defp earmark_option do

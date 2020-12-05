@@ -3,50 +3,31 @@ defmodule Sitex do
   Documentation for `Sitex`.
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> Sitex.hello()
-      :world
-
-  """
-  def hello do
-    :world
-  end
-
-  def sections do
+  def pages do
     [
-      %{title: "Home", file: "docs/sections/home.md", slug: "home"},
-      %{title: "About Me", file: "docs/sections/about.md", slug: "about"}
+      %{title: "Home", file: "content/pages/home.md", slug: "home", url: "/"},
+      %{title: "About Me", file: "content/pages/about.md", slug: "about", url: "/about"}
     ]
   end
 
   def build do
-    File.mkdir_p('site')
+    File.mkdir_p('public')
 
-    for section <- sections() do
-      content = Sitex.Parser.render_md(section.file)
+    for page <- pages() do
+      content = Sitex.Parser.render(page.file, "md")
 
       html =
         Sitex.Parser.render(
-          'web/layouts/layout.html.eex',
+          'templates/layout.html.eex',
+          "eex",
           content: content,
-          sections: sections(),
-          title: section.title
+          pages: pages(),
+          title: page.title
         )
 
-      write_file(section.slug, html)
+      Sitex.FileManager.write(page.slug, html)
     end
-  end
 
-  def write_file(_="home", file_content) do
-    File.write("site/index.html", file_content)
-  end
-
-  def write_file(file_name, file_content) do
-    File.mkdir_p("site/#{file_name}")
-    File.write("site/#{file_name}/index.html", file_content)
+    Sitex.FileManager.move_assets
   end
 end
