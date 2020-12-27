@@ -10,7 +10,8 @@
     <div class="container">
       <div class="row">
         <div class="column">
-          <h1><%= @title %></h1>
+          <h1>Sitex</h1>
+          <p>Static site generator</p>
         </div>
         <hr>
       </div>

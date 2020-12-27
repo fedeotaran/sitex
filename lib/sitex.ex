@@ -18,7 +18,7 @@ defmodule Sitex do
 
       html =
         Sitex.Parser.render(
-          'templates/layout.html.eex',
+          'theme/templates/layout.html.eex',
           "eex",
           content: content,
           pages: pages(),
