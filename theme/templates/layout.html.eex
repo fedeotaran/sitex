@@ -1,43 +1,23 @@
 <html>
   <head>
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
-    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
-    <link rel="stylesheet" href="css/nav.css">
+    <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
+    <link rel="stylesheet" href="https://newcss.net/theme/night.css">
     <title><%= @title %></title>
   </head>
   <body>
-    <div class="container">
-      <div class="row">
-        <div class="column">
-          <h1>Sitex</h1>
-          <p>Static site generator</p>
-        </div>
-        <hr>
-      </div>
-      <div class="row">
-        <div class="column">
-          <nav class="nav">
-            <ul class="nav_list">
-              <%= for section <- @pages do %>
-                <li class="nav_item">
-                  <a href="<%= "#{section.url}" %>">
-                    <%= section.title %>
-                  </a>
-                </li>
-              <% end %>
-            </ul>
-          </nav>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">
+    <header>
+      <h1>Sitex</h1>
+      <nav>
+        <%= for section <- @pages do %>
+          <a href="<%= "#{section.url}" %>"><%= section.title %></a>
+          |
+        <% end %>
+      </nav>
+    </header>
+    <article>
           <%= @content %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="column">Footer</div>
-      </div>
-    </div>
+    </article>
+    <footer>Footer</footer>
   </body>
 </html>
