@@ -1,55 +1,41 @@
-# Lorem
+# Sobre mi
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam vitae massa sem.
-Vivamus varius ante ac iaculis tincidunt. Phasellus sit amet tempor odio.
-Quisque tincidunt congue sodales. Integer non ex rhoncus, maximus purus eu,
-lobortis neque. Quisque dictum eros ac augue ultrices hendrerit. Etiam
-sollicitudin, dui et placerat mollis, magna metus rhoncus enim, et iaculis nunc
-nulla a orci. Nam quam diam, posuere at mi id, pulvinar scelerisque ex.
-Suspendisse euismod dolor diam, vitae imperdiet ipsum iaculis nec. Quisque sed
-tempus lorem, id finibus nisl. Cras dictum sit amet lacus a facilisis. Praesent
-eu nunc nisi. Ut placerat eu ipsum varius lobortis. Mauris faucibus ultricies
-quam, nec aliquet velit ornare eu. Nam magna enim, maximus at vehicula id,
-convallis id est. Donec euismod metus ac mollis placerat.
+## Biofrafía
 
-Donec vestibulum enim dolor, at malesuada purus ullamcorper et. Donec ac auctor
-lectus. Ut fringilla scelerisque viverra. Integer eros ligula, maximus
-hendrerit tristique eget, tempor quis nisi. Nullam dignissim massa at odio
-mattis dapibus. Pellentesque ullamcorper suscipit velit, eget scelerisque magna
-facilisis nec. Nullam at eleifend ex.
+Soy Desarrollador Web con casi 7 años de expericia y ayudante de cátedra en dos
+materias de la Facultad de Informática.
 
-Quisque volutpat, elit in ullamcorper efficitur, orci lorem convallis erat, sit
-amet efficitur massa quam vel lacus. Mauris congue, nisi vitae lobortis
-consequat, ligula sem semper justo, id fringilla felis tortor quis eros.
-Suspendisse tristique tristique leo, a posuere est. Nam placerat quam commodo
-elit luctus, rhoncus finibus eros consectetur. Quisque ornare vel neque non
-lacinia. Pellentesque non euismod risus. Proin mi purus, vulputate eget leo ac,
-luctus fringilla enim. Sed dictum vel enim auctor imperdiet. Sed et laoreet
-tortor.
+Desde hace cuatro años que trabajo desarrollando aplicaciones web con el
+framework Ruby on Rails. Soy desarrollador Full-Stack aunque me tengo
+preferencia por el desarrollo Backend.
 
-Suspendisse sollicitudin mauris diam, vel malesuada lectus efficitur nec.
-Mauris dictum tincidunt nunc in malesuada. Aliquam vehicula ante lectus, non
-pretium libero fermentum sagittis. Aenean rutrum at ipsum feugiat molestie.
-Cras facilisis consectetur velit vitae euismod. Donec bibendum, nunc ac auctor
-sollicitudin, lorem elit tempus nibh, eget fringilla purus ipsum nec justo.
-Vestibulum scelerisque consectetur lacus, quis vestibulum est. Nulla id
-faucibus nulla. Nunc sed rhoncus elit. Donec laoreet rhoncus finibus.
+Vivo en La Plata, Provincia de Buenos Aires donde estudié la carrera de
+Licenciatura en Sistemas en la Universidad Nacional de La Plata (UNLP).
 
-## Ipsum
+Soy un apasionado de la Informática y aunque mi mayor experiencia fue como
+desarrollador me gusta la administración de equipos y las tareas de DevOps.
+Desde hace un año estoy realmente interesado en la programación funcional y los
+sistemas distribuidos.
 
- + Lorem ipsum dolor sit amet, consectetur adipiscing elit.
- + In a elit interdum, ultricies ipsum ut, dignissim ipsum.
- + Morbi a mi sagittis, accumsan massa id, ultrices turpis.
- + Vestibulum eget lectus pharetra, ultricies ligula vel, tincidunt ipsum.
+## Intereses
 
-## Dolor sit amet
+ + Desarrollo Web
+ + Programación Funcional
+ + Sistemas Distribuidos
+ + DevOps
 
- - Quisque non dui quis nisl interdum porta in et velit.
- - Fusce euismod mauris vel nulla pharetra pretium.
- - Sed at turpis sed risus varius condimentum eu quis lectus.
- - Sed vel nunc id mi vulputate egestas vel eu sem.
+## Formación
 
-## Consectetur
+ - Analista Programador Universitario, 2016 en Facultad de Informática de la
+   Universidad Nacional de La Plata (UNLP)
 
- + Morbi rhoncus ante ut purus condimentum, sit amet placerat leo varius.
- + Aenean tempor metus id pharetra sagittis.
+ - Licencitura en sistemas, 2018 en Facultad de Informática de la Universidad
+   Nacional de La Plata (UNLP)
+
+## Docencia
+
+ - Jefe de Trabajos Prácticos, Proyecto de Software en Facultad de Informática
+   de la Universidad Nacional de La Plata (UNLP)
+
+ - Jefe de Trabajos Prácticos, Seminario de Lenguaje - Python en Facultad de
+   Informática de la Universidad Nacional de La Plata (UNLP)

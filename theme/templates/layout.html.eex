@@ -16,7 +16,7 @@
       </nav>
     </header>
     <article>
-          <%= @content %>
+      <%= @content %>
     </article>
     <footer>Footer</footer>
   </body>

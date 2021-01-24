@@ -1,4 +1,4 @@
-# Lorem
+## Home
 
 Donec vestibulum enim dolor, at malesuada purus ullamcorper et. Donec ac auctor
 lectus. Ut fringilla scelerisque viverra. Integer eros ligula, maximus
