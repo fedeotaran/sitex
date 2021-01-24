@@ -2,6 +2,11 @@ defmodule Sitex do
   @moduledoc """
   Documentation for `Sitex`.
   """
+  alias Sitex.FileManager
+  alias Sitex.View
+
+  @templates_path Application.fetch_env!(:paths, :templates)
+  @layout_name "layout.html.eex"
 
   def pages do
     [
@@ -11,23 +16,21 @@ defmodule Sitex do
   end
 
   def build do
-    File.mkdir_p('public')
+    FileManager.create_build_dir()
+    build_pages()
+    FileManager.move_assets()
+  end
 
+  defp build_pages() do
     for page <- pages() do
-      content = Sitex.Parser.render(page.file, "md")
+      content = View.render(page.file, "md")
 
       html =
-        Sitex.Parser.render(
-          'theme/templates/layout.html.eex',
-          "eex",
-          content: content,
-          pages: pages(),
-          title: page.title
-        )
+        [@templates_path, @layout_name]
+        |> Enum.join("/")
+        |> View.render("eex", content: content, pages: pages(), title: page.title)
 
-      Sitex.FileManager.write(page.slug, html)
+      FileManager.write(page.slug, html)
     end
-
-    Sitex.FileManager.move_assets
   end
 end
