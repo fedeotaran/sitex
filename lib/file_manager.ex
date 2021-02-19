@@ -1,6 +1,8 @@
 defmodule Sitex.FileManager do
-  @build_path Application.fetch_env!(:paths, :build)
-  @assets_path Application.fetch_env!(:paths, :assets)
+  alias Sitex.Config
+
+  @build_path Config.load().paths.build
+  @assets_path Config.load().paths.assets
 
   def create_build_dir() do
     File.mkdir_p(@build_path)

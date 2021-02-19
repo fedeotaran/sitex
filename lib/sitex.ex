@@ -4,9 +4,10 @@ defmodule Sitex do
   """
   alias Sitex.FileManager
   alias Sitex.View
+  alias Sitex.Config
 
-  @templates_path Application.fetch_env!(:paths, :templates)
-  @layout_name "layout.html.eex"
+  @templates_path Config.load().paths.templates
+  @layout_name Config.load().layout
 
   def pages do
     [

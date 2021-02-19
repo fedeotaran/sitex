@@ -1,0 +1,15 @@
+---
+paths:
+  build: "public"
+  assets: "theme/assets"
+  templates: "theme/templates"
+pages:
+  - title: "Home"
+    file: "content/pages/home.md"
+    slug: "home"
+    url: "/"
+  - title: "About Me"
+    file: "content/pages/about.md"
+    slug: "about"
+    url: "/about"
+layout: "layout.html.eex"
