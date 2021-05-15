@@ -1,15 +1,22 @@
 ---
-paths:
-  build: "public"
-  assets: "theme/assets"
-  templates: "theme/templates"
+#layout: "layout.html.eex"
+#paths:
+#  build: "public"
+#  templates: "templates"
 pages:
-  - title: "Home"
+  -
+    title: "Home"
     file: "content/pages/home.md"
     slug: "home"
     url: "/"
-  - title: "About Me"
+  -
+    title: "About Me"
     file: "content/pages/about.md"
     slug: "about"
     url: "/about"
-layout: "layout.html.eex"
+  -
+    title: "About you"
+    file: "content/pages/about.md"
+    slug: "about-you"
+    url: "/about-you"
+

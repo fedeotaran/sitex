@@ -2,7 +2,7 @@
   <head>
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
-    <link rel="stylesheet" href="https://newcss.net/theme/night.css">
+    <link rel="stylesheet" href="https://newcss.net/theme/terminal.css">
     <title><%= @title %></title>
   </head>
   <body>
@@ -15,9 +15,11 @@
         <% end %>
       </nav>
     </header>
-    <article>
-      <%= @content %>
-    </article>
+    <main>
+      <article>
+        <%= @content %>
+      </article>
+    </main>
     <footer>Footer</footer>
   </body>
 </html>

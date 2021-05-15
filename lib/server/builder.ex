@@ -1,8 +1,10 @@
 defmodule Sitex.Server.Builder do
   use Plug.Builder
 
-  plug(Plug.Logger)
-  plug(Plug.Static, at: "/", from: "public")
+  require Logger
+
+  plug(Plug.Logger, log: :debug)
+  plug(Plug.Static, at: "/", from: "public", only: ~w(favicon.ico index.html))
   plug(:index)
   plug(:not_found)
 
@@ -13,10 +15,16 @@ defmodule Sitex.Server.Builder do
       |> Path.join()
       |> File.read!()
 
-    send_resp(conn, 200, index_file) |> halt()
+    conn
+    |> put_resp_header("Content-Type", "text/html; charset=UTF-8")
+    |> send_resp(200, index_file)
+    |> halt()
   end
 
   def not_found(conn, _) do
-    send_resp(conn, 404, "Not Found!")
+    conn
+    |> put_resp_header("Content-Type", "text/html; charset=UTF-8")
+    |> send_resp(404, "Not Found!")
+    |> halt()
   end
 end

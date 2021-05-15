@@ -28,3 +28,6 @@ sitex-*.tar
 
 # Ignore generated web
 /public/
+
+# ignore assets folder
+/assets/
