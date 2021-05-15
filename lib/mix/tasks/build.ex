@@ -5,7 +5,7 @@ defmodule Mix.Tasks.Sitex.Build do
   @shortdoc "Build de application."
   def run(_) do
     Logger.info("Generating files..")
-    Sitex.build()
+    Sitex.Builder.build()
     Logger.info("All Done!")
   end
 end
