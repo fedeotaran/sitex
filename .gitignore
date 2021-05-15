@@ -22,7 +22,9 @@ erl_crash.dump
 # Ignore package tarball (built via "mix hex.build").
 sitex-*.tar
 
+# Ignore elixirLS folders
 .elixir_ls
+.elixir-ls
 
 # Ignore generated web
 /public/
