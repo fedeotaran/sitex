@@ -14,20 +14,24 @@ defmodule Sitex.Builder do
     FileManager.move_assets()
   end
 
-  defp build_pages() do
+  def build_pages() do
     for page <- @pages do
-      content = View.render(page.file, "md")
-
-      html =
-        [@templates_path, @layout_name]
-        |> Enum.join("/")
-        |> View.render("eex",
-          content: content,
-          pages: @pages,
-          title: page.title
-        )
-
-      FileManager.write(page.slug, html)
+      build_page(page)
     end
+  end
+
+  def build_page(page) do
+    content = View.render(page.file, "md")
+
+    html =
+      [@templates_path, @layout_name]
+      |> Enum.join("/")
+      |> View.render("eex",
+        content: content,
+        pages: @pages,
+        title: page.title
+      )
+
+    FileManager.write(page.slug, html)
   end
 end

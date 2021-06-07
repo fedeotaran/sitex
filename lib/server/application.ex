@@ -10,6 +10,7 @@ defmodule Sitex.Server.Application do
     port = 4001
 
     children = [
+      {Sitex.Server.Watcher, []},
       {Plug.Cowboy, scheme: :http, plug: Sitex.Server.Builder, options: [port: port]}
     ]
 
