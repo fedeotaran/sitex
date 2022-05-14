@@ -3,10 +3,10 @@ defmodule Sitex.Builder do
   alias Sitex.View
   alias Sitex.Config
 
-  @paths Map.get(Config.load(), :paths, %{})
+  @paths Map.get(Config.get(), :paths, %{})
   @templates_path Map.get(@paths, :templates, "templates")
-  @layout_name Map.get(Config.load(), :layout, "layout.html.eex")
-  @pages Map.fetch!(Config.load(), :pages)
+  @layout_name Map.get(Config.get(), :layout, "layout.html.eex")
+  @pages Map.fetch!(Config.get(), :pages)
 
   def build do
     FileManager.create_build_dir()

@@ -3,7 +3,7 @@ defmodule Sitex.Server.Builder do
   require Logger
   alias Sitex.Config
 
-  @build_path Map.get(Config.load(), :build, "site")
+  @build_path Map.get(Config.get(), :build, "site")
 
   plug(Plug.Logger, log: :debug)
   plug(Plug.Static, at: "/", from: @build_path, only: ~w(favicon.ico index.html))

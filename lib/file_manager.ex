@@ -1,7 +1,7 @@
 defmodule Sitex.FileManager do
   alias Sitex.Config
 
-  @paths Map.get(Config.load(), :paths, %{})
+  @paths Map.get(Config.get(), :paths, %{})
   @build_path Map.get(@paths, :build, "site")
   @statics_path Map.get(@paths, :statics, "priv/static")
   # @assets_path Map.get(@paths, :assets, "assets")

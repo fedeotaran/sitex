@@ -5,8 +5,8 @@ defmodule Sitex.Server.Watcher do
 
   alias Sitex.Config
 
-  @content_path Map.get(Config.load(), :content, "content")
-  @templates_path Map.get(Config.load(), :templates, "templates")
+  @content_path Map.get(Config.get(), :content, "content")
+  @templates_path Map.get(Config.get(), :templates, "templates")
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args)
