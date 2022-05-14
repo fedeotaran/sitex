@@ -3,11 +3,6 @@ defmodule Sitex.Builder do
   alias Sitex.View
   alias Sitex.Config
 
-  @paths Map.get(Config.get(), :paths, %{})
-  @templates_path Map.get(@paths, :templates, "templates")
-  @layout_name Map.get(Config.get(), :layout, "layout.html.eex")
-  @pages Map.fetch!(Config.get(), :pages)
-
   def build do
     FileManager.create_build_dir()
     build_pages()
@@ -15,7 +10,7 @@ defmodule Sitex.Builder do
   end
 
   def build_pages() do
-    for page <- @pages do
+    for page <- pages() do
       build_page(page)
     end
   end
@@ -24,14 +19,27 @@ defmodule Sitex.Builder do
     content = View.render(page.file, "md")
 
     html =
-      [@templates_path, @layout_name]
+      [templates(), layout()]
       |> Enum.join("/")
       |> View.render("eex",
         content: content,
-        pages: @pages,
+        pages: pages(),
         title: page.title
       )
 
     FileManager.write(page.slug, html)
+  end
+
+  defp templates() do
+    Map.get(Config.get(), :paths, %{})
+    |> Map.get(:templates, "templates")
+  end
+
+  defp layout() do
+    Map.get(Config.get(), :layout, "layout.html.eex")
+  end
+
+  defp pages() do
+    Map.fetch!(Config.get(), :pages)
   end
 end
