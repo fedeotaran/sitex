@@ -1,8 +1,9 @@
 ---
 layout: "layout.html.eex"
 paths:
-#  build: "public"
+  build: "public"
   templates: "templates"
+  content: "content"
 blog: true
 pages:
   - title: "Home"

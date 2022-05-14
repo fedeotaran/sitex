@@ -9,6 +9,7 @@
     <header>
       <h1>Sitex</h1>
       <nav>
+          |
         <%= for section <- @pages do %>
           <a href="<%= "#{section.url}" %>"><%= section.title %></a>
           |
