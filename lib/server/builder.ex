@@ -1,16 +1,18 @@
 defmodule Sitex.Server.Builder do
   use Plug.Builder
-
   require Logger
+  alias Sitex.Config
+
+  @build_path Map.get(Config.load(), :build, "site")
 
   plug(Plug.Logger, log: :debug)
-  plug(Plug.Static, at: "/", from: "public", only: ~w(favicon.ico index.html))
+  plug(Plug.Static, at: "/", from: @build_path, only: ~w(favicon.ico index.html))
   plug(:index)
   plug(:not_found)
 
   def index(%{path_info: path} = conn, _params) do
     index_file =
-      ["public", List.wrap(path), "index.html"]
+      [@build_path, List.wrap(path), "index.html"]
       |> List.flatten()
       |> Path.join()
       |> File.read!()

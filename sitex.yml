@@ -1,22 +1,15 @@
 ---
-#layout: "layout.html.eex"
-#paths:
+layout: "layout.html.eex"
+paths:
 #  build: "public"
-#  templates: "templates"
+  templates: "templates"
+blog: true
 pages:
-  -
-    title: "Home"
+  - title: "Home"
     file: "content/pages/home.md"
     slug: "home"
     url: "/"
-  -
-    title: "About Me"
+  - title: "About Me"
     file: "content/pages/about.md"
     slug: "about"
     url: "/about"
-  -
-    title: "About you"
-    file: "content/pages/about.md"
-    slug: "about-you"
-    url: "/about-you"
-

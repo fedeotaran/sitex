@@ -2,15 +2,16 @@ defmodule Sitex.FileManager do
   alias Sitex.Config
 
   @paths Map.get(Config.load(), :paths, %{})
-  @build_path Map.get(@paths, :build, "public")
-  @assets_path Map.get(@paths, :assets, "assets")
+  @build_path Map.get(@paths, :build, "site")
+  @statics_path Map.get(@paths, :statics, "priv/static")
+  # @assets_path Map.get(@paths, :assets, "assets")
 
   def create_build_dir() do
     File.mkdir_p(@build_path)
   end
 
-  def move_assets do
-    if File.dir?(@assets_path), do: File.cp_r(@assets_path, @build_path)
+  def move_statics do
+    if File.dir?(@statics_path), do: File.cp_r(@statics_path, @build_path)
   end
 
   def write(file_name \\ 'home', file_content)

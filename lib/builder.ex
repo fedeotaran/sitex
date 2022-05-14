@@ -11,7 +11,7 @@ defmodule Sitex.Builder do
   def build do
     FileManager.create_build_dir()
     build_pages()
-    FileManager.move_assets()
+    FileManager.move_statics()
   end
 
   def build_pages() do
