@@ -27,7 +27,7 @@ defmodule Sitex.Builder do
         title: page.title
       )
 
-    FileManager.write(page.slug, html)
+    FileManager.write(page.url, html)
   end
 
   defp templates() do

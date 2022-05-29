@@ -17,26 +17,19 @@ defmodule Sitex.FileManager do
     if File.dir?(statics_folder()), do: File.cp_r(statics_folder(), build_folder())
   end
 
-  def write(file_name \\ 'home', file_content)
-
-  def write(_ = 'home', file_content) do
-    build_path(["index.html"])
+  def write(_ = "/", file_content) do
+    url_to_path("/")
     |> File.write(file_content)
   end
 
-  def write(file_name, file_content) do
-    [file_name]
-    |> build_path()
-    |> File.mkdir_p()
+  def write(url, file_content) do
+    path = url_to_path(url)
 
-    [file_name, "index.html"]
-    |> build_path()
+    File.mkdir_p(path)
+
+    [path, "index.html"]
+    |> Path.join()
     |> File.write(file_content)
-  end
-
-  defp build_path(files) do
-    paths = [build_folder() | files]
-    Enum.join(paths, "/")
   end
 
   def build_folder() do
@@ -56,5 +49,14 @@ defmodule Sitex.FileManager do
   defp move_favicon() do
     Path.join([defaults_dir(), "favicon.ico"])
     |> File.cp!(Path.join([build_folder(), "favicon.ico"]))
+  end
+
+  defp url_to_path(url) do
+    path =
+      url
+      |> to_string()
+      |> String.split("/", trim: true)
+
+    Path.join([build_folder() | path])
   end
 end
