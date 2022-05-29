@@ -1,8 +1,6 @@
 defmodule Sitex.Initializer do
-  @priv_dir :code.priv_dir(:sitex)
-  @defaults_dir Path.join([@priv_dir, "defaults"])
-
   alias Sitex.Config
+  alias Sitex.FileManager
 
   def init do
     copy_config()
@@ -12,17 +10,17 @@ defmodule Sitex.Initializer do
   end
 
   defp copy_config() do
-    Path.join([@defaults_dir, "sitex.yml"])
+    Path.join([FileManager.defaults_dir(), "sitex.yml"])
     |> File.copy!('./sitex.yml')
   end
 
   defp copy_theme() do
     File.mkdir_p!("./themes/default/layout")
 
-    Path.join([@defaults_dir, "layouts"])
+    Path.join([FileManager.defaults_dir(), "layouts"])
     |> File.cp_r!("./themes/default/layout")
 
-    Path.join([@defaults_dir, "favicon.ico"])
+    Path.join([FileManager.defaults_dir(), "favicon.ico"])
     |> File.copy!("./themes/default/favicon.ico")
   end
 
