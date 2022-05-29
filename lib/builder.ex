@@ -19,7 +19,7 @@ defmodule Sitex.Builder do
     content = render(page.file, "md")
 
     html =
-      [templates(), layout()]
+      [templates(), "layout.html.eex"]
       |> Enum.join("/")
       |> render("eex",
         content: content,
@@ -33,10 +33,6 @@ defmodule Sitex.Builder do
   defp templates() do
     Map.get(Config.get(), :paths, %{})
     |> Map.get(:templates, "templates")
-  end
-
-  defp layout() do
-    Map.get(Config.get(), :layout, "layout.html.eex")
   end
 
   defp pages() do
