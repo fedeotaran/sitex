@@ -1,7 +1,6 @@
 ---
 paths:
   build: "site"
-  templates: "themes/default/layout"
   content: "content"
 build_folder: "site"
 theme: "default"

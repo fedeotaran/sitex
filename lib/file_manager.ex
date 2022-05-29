@@ -8,6 +8,12 @@ defmodule Sitex.FileManager do
     @defaults_dir
   end
 
+  def layout_folder() do
+    theme = Config.get() |> Map.get("theme", "default")
+
+    Path.join(["themes", theme, "layouts"])
+  end
+
   def create_build_dir() do
     File.mkdir_p(build_folder())
   end

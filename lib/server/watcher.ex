@@ -4,13 +4,15 @@ defmodule Sitex.Server.Watcher do
   require Logger
 
   alias Sitex.Config
+  alias Sitex.FileManager
 
   def start_link(args) do
     GenServer.start_link(__MODULE__, args)
   end
 
   def init(_args) do
-    {:ok, watcher_pid} = FileSystem.start_link(dirs: [content_folder(), templates_folder()])
+    {:ok, watcher_pid} =
+      FileSystem.start_link(dirs: [content_folder(), FileManager.layout_folder()])
 
     FileSystem.subscribe(watcher_pid)
     {:ok, %{watcher_pid: watcher_pid}}
@@ -30,10 +32,5 @@ defmodule Sitex.Server.Watcher do
   defp content_folder() do
     Config.get()
     |> Map.get(:content, "content")
-  end
-
-  defp templates_folder() do
-    Config.get()
-    |> Map.get(:templates, "templates")
   end
 end
