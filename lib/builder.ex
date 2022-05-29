@@ -1,6 +1,6 @@
 defmodule Sitex.Builder do
   alias Sitex.FileManager
-  alias Sitex.View
+  alias Sitex.Parser
   alias Sitex.Config
 
   def build do
@@ -16,12 +16,12 @@ defmodule Sitex.Builder do
   end
 
   def build_page(page) do
-    content = View.render(page.file, "md")
+    content = render(page.file, "md")
 
     html =
       [templates(), layout()]
       |> Enum.join("/")
-      |> View.render("eex",
+      |> render("eex",
         content: content,
         pages: pages(),
         title: page.title
@@ -41,5 +41,11 @@ defmodule Sitex.Builder do
 
   defp pages() do
     Map.fetch!(Config.get(), :pages)
+  end
+
+  defp render(file_name, file_type, assigns \\ []) do
+    file_name
+    |> File.read!()
+    |> Parser.parse(file_type, assigns)
   end
 end
