@@ -4,7 +4,13 @@ defmodule Sitex.Server.Builder do
   alias Sitex.Config
 
   plug(Plug.Logger, log: :debug)
-  plug(Plug.Static, at: "/", from: "site", only: ~w(favicon.ico index.html))
+
+  plug(Plug.Static,
+    at: "/",
+    from: {Sitex.FileManager, :build_folder, []},
+    only: ~w(favicon.ico index.html)
+  )
+
   plug(:index)
   plug(:not_found)
 
