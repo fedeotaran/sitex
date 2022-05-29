@@ -1,5 +1,4 @@
 defmodule Sitex.Initializer do
-  alias Sitex.Config
   alias Sitex.FileManager
 
   def init do
@@ -32,13 +31,7 @@ defmodule Sitex.Initializer do
 
   defp update_gitignore do
     File.open("./.gitignore", [:append], fn file ->
-      IO.binwrite(file, "\n/#{build_folder()}\n")
+      IO.binwrite(file, "\n/#{FileManager.build_folder()}\n")
     end)
-  end
-
-  defp build_folder() do
-    Config.get()
-    |> Map.get(:paths, %{})
-    |> Map.get(:build, "site")
   end
 end

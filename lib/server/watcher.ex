@@ -3,7 +3,6 @@ defmodule Sitex.Server.Watcher do
 
   require Logger
 
-  alias Sitex.Config
   alias Sitex.FileManager
 
   def start_link(args) do
@@ -12,7 +11,7 @@ defmodule Sitex.Server.Watcher do
 
   def init(_args) do
     {:ok, watcher_pid} =
-      FileSystem.start_link(dirs: [content_folder(), FileManager.layout_folder()])
+      FileSystem.start_link(dirs: [FileManager.content_folder(), FileManager.layout_folder()])
 
     FileSystem.subscribe(watcher_pid)
     {:ok, %{watcher_pid: watcher_pid}}
@@ -27,10 +26,5 @@ defmodule Sitex.Server.Watcher do
 
   def handle_info({:file_event, watcher_pid, :stop}, %{watcher_pid: watcher_pid} = state) do
     {:noreply, state}
-  end
-
-  defp content_folder() do
-    Config.get()
-    |> Map.get(:content, "content")
   end
 end

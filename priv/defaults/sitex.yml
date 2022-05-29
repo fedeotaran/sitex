@@ -1,12 +1,8 @@
 ---
-paths:
-  build: "site"
-  content: "content"
-build_folder: "site"
 theme: "default"
+build_folder: "site"
 content_folder: "docs"
 pages:
   - title: "Home"
     file: "content/pages/home.md"
-    slug: "home"
     url: "/"

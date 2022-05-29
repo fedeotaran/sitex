@@ -1,13 +1,15 @@
 defmodule Sitex.Server.Builder do
   use Plug.Builder
+
   require Logger
-  alias Sitex.Config
+
+  alias Sitex.FileManager
 
   plug(Plug.Logger, log: :debug)
 
   plug(Plug.Static,
     at: "/",
-    from: {Sitex.FileManager, :build_folder, []},
+    from: {FileManager, :build_folder, []},
     only: ~w(favicon.ico index.html)
   )
 
@@ -15,8 +17,10 @@ defmodule Sitex.Server.Builder do
   plug(:not_found)
 
   def index(%{path_info: path} = conn, _params) do
+    build_folder_path = FileManager.build_folder() |> Path.absname()
+
     index_file =
-      [build_folder(), List.wrap(path), "index.html"]
+      [build_folder_path, List.wrap(path), "index.html"]
       |> List.flatten()
       |> Path.join()
       |> File.read!()
@@ -32,12 +36,5 @@ defmodule Sitex.Server.Builder do
     |> put_resp_header("Content-Type", "text/html; charset=UTF-8")
     |> send_resp(404, "Not Found!")
     |> halt()
-  end
-
-  defp build_folder() do
-    Config.get()
-    |> Map.get(:paths)
-    |> Map.get(:build, "site")
-    |> Path.absname()
   end
 end

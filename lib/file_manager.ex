@@ -14,6 +14,16 @@ defmodule Sitex.FileManager do
     Path.join(["themes", theme, "layouts"])
   end
 
+  def content_folder() do
+    Config.get()
+    |> Map.get(:content_folder, "docs")
+  end
+
+  def build_folder() do
+    Config.get()
+    |> Map.get(:build_folder, "site")
+  end
+
   def create_build_dir() do
     File.mkdir_p(build_folder())
   end
@@ -36,13 +46,6 @@ defmodule Sitex.FileManager do
     [path, "index.html"]
     |> Path.join()
     |> File.write(file_content)
-  end
-
-  def build_folder() do
-    Config.get()
-    |> Map.get(:paths, %{})
-    |> Map.get(:build, "site")
-    |> Path.absname()
   end
 
   defp statics_folder() do
