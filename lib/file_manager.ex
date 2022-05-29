@@ -35,11 +35,13 @@ defmodule Sitex.FileManager do
     Config.get()
     |> Map.get(:paths, %{})
     |> Map.get(:build, "site")
+    |> Path.absname()
   end
 
   defp statics_folder() do
     Config.get()
     |> Map.get(:paths, %{})
     |> Map.get(:build, "priv/static")
+    |> Path.absname()
   end
 end

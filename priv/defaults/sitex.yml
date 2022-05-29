@@ -1,0 +1,11 @@
+---
+layout: "layout.html.eex"
+paths:
+  build: "site"
+  templates: "themes/default/layout"
+  content: "content"
+pages:
+  - title: "Home"
+    file: "content/pages/home.md"
+    slug: "home"
+    url: "/"

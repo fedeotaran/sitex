@@ -30,6 +30,8 @@ defmodule Sitex.Server.Builder do
 
   defp build_folder() do
     Config.get()
+    |> Map.get(:paths)
     |> Map.get(:build, "site")
+    |> Path.absname()
   end
 end
