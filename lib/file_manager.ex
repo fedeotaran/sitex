@@ -30,12 +30,12 @@ defmodule Sitex.FileManager do
 
   def move_statics do
     move_favicon()
-    if File.dir?(statics_folder()), do: File.cp_r(statics_folder(), build_folder())
   end
 
   def write(_ = "/", file_content) do
-    url_to_path("/")
-    |> File.write(file_content)
+    path = url_to_path("/")
+    File.write(path, file_content)
+    path
   end
 
   def write(url, file_content) do
@@ -46,13 +46,8 @@ defmodule Sitex.FileManager do
     [path, "index.html"]
     |> Path.join()
     |> File.write(file_content)
-  end
 
-  defp statics_folder() do
-    Config.get()
-    |> Map.get(:paths, %{})
-    |> Map.get(:build, "priv/static")
-    |> Path.absname()
+    path
   end
 
   defp move_favicon() do

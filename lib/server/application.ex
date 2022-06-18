@@ -7,7 +7,7 @@ defmodule Sitex.Server.Application do
   def start(_type, _args) do
     Logger.debug("Starting Application...")
 
-    port = 4001
+    port = 80
 
     children = [
       {Sitex.Server.Watcher, []},

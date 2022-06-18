@@ -2,8 +2,8 @@
   <head>
     <link rel="stylesheet" href="https://fonts.xz.style/serve/inter.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@exampledev/new.css@1/new.min.css">
-    <link rel="stylesheet" href="https://newcss.net/theme/night.css">
     <title><%= @title %></title>
+    <style type="text/css"><%= Sitex.Builder.code_style() %></style>
   </head>
   <body>
     <header>
@@ -17,9 +17,7 @@
       </nav>
     </header>
     <main>
-      <article>
-        <%= @content %>
-      </article>
+      <%= @inner_body %>
     </main>
     <footer>Footer</footer>
   </body>

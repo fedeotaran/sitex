@@ -1,7 +1,10 @@
 ---
 theme: "default"
+code_theme: "tango"
 build_folder: "site"
-content_folder: "docs"
+content_folder: "content"
+blog_folder: "blog"
+blog: true
 pages:
   - title: "Home"
     file: "content/pages/home.md"

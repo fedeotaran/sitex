@@ -25,7 +25,10 @@ defmodule Sitex.MixProject do
       {:earmark, "~> 1.4"},
       {:plug_cowboy, "~> 2.0"},
       {:yamerl, "~> 0.8.0"},
-      {:file_system, "~> 0.2"}
+      {:file_system, "~> 0.2"},
+      {:nimble_publisher, path: "../nimble_publisher"},
+      {:makeup_elixir, "~> 0.16.0"},
+      {:makeup_erlang, "~> 0.1.1"}
     ]
   end
 end
