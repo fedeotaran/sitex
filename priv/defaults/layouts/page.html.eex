@@ -1,0 +1,14 @@
+<header>
+  <h1><%= @title %></h1>
+  <nav>
+    |
+    <%= for section <- @pages do %>
+      <a href="<%= "#{section.url}" %>"><%= section.title %></a>
+      |
+    <% end %>
+  </nav>
+</header>
+<main>
+  <%= @inner_body %>
+</main>
+<footer>Footer</footer>

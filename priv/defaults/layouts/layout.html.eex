@@ -6,19 +6,6 @@
     <style type="text/css"><%= Sitex.Builder.code_style() %></style>
   </head>
   <body>
-    <header>
-      <h1>Sitex</h1>
-      <nav>
-          |
-        <%= for section <- @pages do %>
-          <a href="<%= "#{section.url}" %>"><%= section.title %></a>
-          |
-        <% end %>
-      </nav>
-    </header>
-    <main>
-      <%= @inner_body %>
-    </main>
-    <footer>Footer</footer>
+    <%= @inner_body %>
   </body>
 </html>
