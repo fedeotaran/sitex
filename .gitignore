@@ -32,3 +32,6 @@ sitex-*.tar
 
 # Ignore content pages
 /content/
+
+# Mac files
+.DS_Store
