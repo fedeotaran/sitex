@@ -14,10 +14,10 @@ defmodule Sitex.Initializer do
   end
 
   defp copy_theme() do
-    File.mkdir_p!("./themes/default/layouts")
+    File.mkdir_p!("./themes/default/templates")
 
-    Path.join([FileManager.defaults_dir(), "layouts"])
-    |> File.cp_r!("./themes/default/layouts")
+    Path.join([FileManager.defaults_dir(), "templates"])
+    |> File.cp_r!("./themes/default/templates")
 
     Path.join([FileManager.defaults_dir(), "favicon.ico"])
     |> File.copy!("./themes/default/favicon.ico")

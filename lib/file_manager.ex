@@ -11,7 +11,7 @@ defmodule Sitex.FileManager do
   def layout_folder() do
     theme = Config.get() |> Map.get("theme", "default")
 
-    Path.join(["themes", theme, "layouts"])
+    Path.join(["themes", theme, "templates"])
   end
 
   def content_folder() do
