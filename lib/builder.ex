@@ -4,13 +4,6 @@ defmodule Sitex.Builder do
   alias Sitex.Parser
   alias Sitex.Config
 
-  def build do
-    FileManager.create_build_dir()
-    build_posts()
-    build_pages()
-    FileManager.move_statics()
-  end
-
   def code_style() do
     theme =
       Config.get()
@@ -20,10 +13,15 @@ defmodule Sitex.Builder do
     |> Makeup.stylesheet("makeup")
   end
 
+  def build do
+    FileManager.create_build_dir()
+    build_posts()
+    build_pages()
+    FileManager.move_statics()
+  end
+
   defp build_posts() do
-    for entry <- Blog.get_entries() do
-      build_post(entry)
-    end
+    for entry <- Blog.get_entries(), do: build_post(entry)
   end
 
   defp build_post({post, file_name}) do
@@ -34,7 +32,7 @@ defmodule Sitex.Builder do
 
     assigns = [inner_body: post.body, pages: pages(), title: post.title, posts: Blog.get_posts()]
 
-    html = layout() |> render("eex", assigns)
+    html = post() |> render("eex", assigns)
 
     Path.join("blog", url)
     |> FileManager.write(html)
@@ -44,32 +42,41 @@ defmodule Sitex.Builder do
     for page <- pages(), do: build_page(page)
   end
 
-  def build_page(page) do
-    content = page_content(page)
+  def build_page(%{url: '/'} = page) do
     posts = Blog.get_posts()
 
-    assigns = [inner_body: content, pages: pages(), title: page.title, posts: posts]
+    assigns = [inner_body: "", pages: pages(), title: page.title, posts: posts]
 
-    html = layout() |> render("eex", assigns)
+    html = index() |> render("eex", assigns)
 
     FileManager.write(page.url, html)
   end
 
-  defp page_content(%{url: '/'} = page) do
-    content = render(page.file, "md")
+  def build_page(page) do
     posts = Blog.get_posts()
-    assigns = [inner_body: content, pages: pages(), title: page.title, posts: posts]
 
-    index() |> render("eex", assigns)
-  end
+    assigns = [
+      inner_body: render(page.file, "md"),
+      pages: pages(),
+      title: page.title,
+      posts: posts
+    ]
 
-  defp page_content(page) do
-    IO.inspect(page)
-    render(page.file, "md")
+    html = page() |> render("eex", assigns)
+
+    FileManager.write(page.url, html)
   end
 
   defp index() do
     Path.join([FileManager.layout_folder(), "index.html.eex"])
+  end
+
+  defp post() do
+    Path.join([FileManager.layout_folder(), "post.html.eex"])
+  end
+
+  defp page() do
+    Path.join([FileManager.layout_folder(), "page.html.eex"])
   end
 
   defp layout() do
@@ -80,9 +87,36 @@ defmodule Sitex.Builder do
     Map.fetch!(Config.get(), :pages)
   end
 
-  defp render(file_name, file_type, assigns \\ []) do
-    file_name
+  defp render(layout, file_type, assigns \\ [])
+
+  # Render markdown content for pages
+  defp render(layout, "md", assigns) do
+    layout
     |> File.read!()
-    |> Parser.parse(file_type, assigns)
+    |> Parser.parse("md", assigns)
+  end
+
+  # Render content with index or page layout
+  defp render(layout, "eex", assigns) do
+    content =
+      layout
+      |> File.read!()
+      |> Parser.parse("eex", assigns)
+
+    # replate body for base layout
+    assigns =
+      assigns
+      |> Keyword.put(:inner_body, content)
+
+    render_base("eex", assigns)
+  end
+
+  # Render content with base layout
+  defp render_base("eex", assigns) do
+    base_layout = layout()
+
+    base_layout
+    |> File.read!()
+    |> Parser.parse("eex", assigns)
   end
 end
