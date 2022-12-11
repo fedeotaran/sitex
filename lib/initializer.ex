@@ -23,12 +23,6 @@ defmodule Sitex.Initializer do
     |> File.copy!("./themes/default/favicon.ico")
   end
 
-  # defp create_content_dirs do
-  #   File.mkdir("./posts")
-  #   File.mkdir("./drafts")
-  #   File.mkdir("./pages")
-  # end
-
   defp update_gitignore do
     File.open("./.gitignore", [:append], fn file ->
       IO.binwrite(file, "\n/#{FileManager.build_folder()}\n")
