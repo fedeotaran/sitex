@@ -4,6 +4,7 @@ defmodule Sitex.Initializer do
   def init do
     copy_config()
     copy_theme()
+    copy_content()
 
     update_gitignore()
   end
@@ -21,6 +22,13 @@ defmodule Sitex.Initializer do
 
     Path.join([FileManager.defaults_dir(), "favicon.ico"])
     |> File.copy!("./themes/default/favicon.ico")
+  end
+
+  defp copy_content() do
+    File.mkdir_p!("./content/pages")
+
+    Path.join([FileManager.defaults_dir(), "pages"])
+    |> File.cp_r!("./content/pages")
   end
 
   defp update_gitignore do
