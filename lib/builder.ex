@@ -44,8 +44,9 @@ defmodule Sitex.Builder do
 
   def build_page(%{url: '/'} = page) do
     posts = Blog.get_posts()
+    inner_body = render(page.file, "md")
 
-    assigns = [inner_body: "", pages: pages(), title: page.title, posts: posts]
+    assigns = [inner_body: inner_body, pages: pages(), title: page.title, posts: posts]
 
     html = index() |> render("eex", assigns)
 
