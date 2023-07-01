@@ -9,16 +9,19 @@
   </nav>
 </header>
 <main>
-  <section>
-    <h2>Latest posts</h2>
-    <ul>
-      <%= for post <- @posts do %>
-      <li>
-        <a href="<%= "#{post.url}" %>"><%= post.date %> <strong><%= post.title %></strong></a>
-      </li>
-      <% end %>
-    </ul>
-  </section>
+  <%= @inner_body %>
+  <%= if length(@posts) > 0  do %>
+    <section>
+      <h2>Latest posts</h2>
+      <ul>
+        <%= for post <- @posts do %>
+        <li>
+          <a href="<%= "#{post.url}" %>"><%= post.date %> <strong><%= post.title %></strong></a>
+        </li>
+        <% end %>
+      </ul>
+    </section>
+  <% end %>
 </main>
 <footer>
 </footer>
