@@ -22,11 +22,11 @@ defmodule Sitex.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:earmark, "~> 1.4"},
       {:plug_cowboy, "~> 2.0"},
-      {:yamerl, "~> 0.8.0"},
       {:file_system, "~> 0.2"},
+      {:yamerl, "~> 0.8.0"},
       {:nimble_publisher, path: "../nimble_publisher"},
+      {:earmark, "~> 1.4"},
       {:makeup_elixir, "~> 0.16.0"},
       {:makeup_erlang, "~> 0.1.1"}
     ]
