@@ -13,14 +13,24 @@ defmodule Mix.Tasks.Sitex.Init do
       mix sitex.init
 
   This will create all necessary directories and copy default templates and configuration.
+
+  ## Options
+
+    * `--force` or `-f` - Force overwrite of existing files without asking
   """
   use Mix.Task
   require Logger
 
   @shortdoc "Initialize a new Sitex project"
-  def run(_) do
+  def run(args) do
+    opts = parse_args(args)
     Logger.info("🗂️ Generating initial files.")
-    Sitex.Initializer.init()
+    Sitex.Initializer.init(opts)
     Logger.info("✅ All Done!")
+  end
+
+  defp parse_args(args) do
+    force? = "--force" in args or "-f" in args
+    [force: force?]
   end
 end
