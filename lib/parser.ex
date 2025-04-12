@@ -16,6 +16,9 @@ defmodule Sitex.Parser do
   end
 
   defp earmark_option do
-    %Earmark.Options{code_class_prefix: "lang-", smartypants: false}
+    %Earmark.Options{
+      code_class_prefix: "language-",
+      smartypants: false
+    }
   end
 end

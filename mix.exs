@@ -5,7 +5,7 @@ defmodule Sitex.MixProject do
     [
       app: :sitex,
       version: "0.1.0",
-      elixir: "~> 1.14",
+      elixir: "~> 1.18",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]
@@ -26,9 +26,7 @@ defmodule Sitex.MixProject do
       {:file_system, "~> 0.2.10"},
       {:yamerl, "~> 0.8.1"},
       {:nimble_publisher, path: "../nimble_publisher"},
-      {:earmark, "~> 1.4.37"},
-      {:makeup_elixir, "~> 0.16.1"},
-      {:makeup_erlang, "~> 0.1.1"}
+      {:earmark, "~> 1.4.37"}
     ]
   end
 end

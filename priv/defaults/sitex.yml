@@ -1,7 +1,7 @@
 ---
 title: "Sitex"
 theme: "default"
-code_theme: "tango"
+code_theme: "github"
 build_folder: "_site"
 content_folder: "content"
 pages:

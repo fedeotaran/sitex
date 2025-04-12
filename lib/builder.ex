@@ -25,32 +25,6 @@ defmodule Sitex.Builder do
   alias Sitex.Config
 
   @doc """
-  Gets the code style for syntax highlighting.
-
-  ## Example
-
-      iex> Sitex.Builder.code_style()
-      %Makeup.Stylesheet{...}
-
-  ## Theme Options
-
-  Available themes are the same as those supported by Makeup:
-  * `tango` (default)
-  * `monokai`
-  * `github`
-  * `solarized`
-  * And other themes supported by Makeup
-  """
-  def code_style() do
-    theme =
-      Config.get()
-      |> Map.get(:code_theme, "tango")
-
-    String.to_atom("#{theme}_style")
-    |> Makeup.stylesheet("makeup")
-  end
-
-  @doc """
   Builds the entire static site.
 
   This is the main entry point for site generation.
@@ -94,7 +68,8 @@ defmodule Sitex.Builder do
       date: post.date,
       tags: post.tags,
       posts: Blog.get_posts(),
-      site_title: Config.get() |> Map.fetch!(:title)
+      site_title: Config.get() |> Map.fetch!(:title),
+      code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
     html = post() |> render("eex", assigns)
@@ -116,7 +91,8 @@ defmodule Sitex.Builder do
       pages: pages(),
       title: page.title,
       posts: posts,
-      site_title: Config.get() |> Map.fetch!(:title)
+      site_title: Config.get() |> Map.fetch!(:title),
+      code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
     html = index() |> render("eex", assigns)
@@ -132,7 +108,8 @@ defmodule Sitex.Builder do
       pages: pages(),
       title: page.title,
       posts: posts,
-      site_title: Config.get() |> Map.fetch!(:title)
+      site_title: Config.get() |> Map.fetch!(:title),
+      code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
     html = page() |> render("eex", assigns)

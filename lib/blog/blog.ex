@@ -4,7 +4,7 @@ defmodule Sitex.Blog do
       build: Sitex.Blog.Post,
       from: "./content/posts/**/*.md",
       as: :posts,
-      highlighters: [:makeup_elixir, :makeup_erlang]
+      highlighters: []
     ]
 
     NimblePublisher.get_entries(opts)
