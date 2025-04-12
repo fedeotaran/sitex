@@ -1,9 +1,46 @@
 defmodule Sitex.Builder do
+  @moduledoc """
+  Module responsible for building the static site.
+
+  This module handles the generation of all site pages,
+  including blog posts and static pages. It coordinates the
+  rendering process using EEx templates and Markdown content.
+
+  ## Building Process
+
+  1. Creates the build directory
+  2. Generates blog posts
+  3. Generates static pages
+  4. Copies static files
+
+  ## Example
+
+      iex> Sitex.Builder.build()
+      :ok
+  """
+
   alias Sitex.FileManager
   alias Sitex.Blog
   alias Sitex.Parser
   alias Sitex.Config
 
+  @doc """
+  Gets the code style for syntax highlighting.
+
+  ## Example
+
+      iex> Sitex.Builder.code_style()
+      %Makeup.Stylesheet{...}
+
+  ## Theme Options
+
+  Available themes are the same as those supported by Makeup:
+  * `tango` (default)
+  * `monokai`
+  * `github`
+  * `solarized`
+  * And other themes supported by Makeup
+  """
   def code_style() do
     theme =
       Config.get()
@@ -13,6 +50,24 @@ defmodule Sitex.Builder do
     |> Makeup.stylesheet("makeup")
   end
 
+  @doc """
+  Builds the entire static site.
+
+  This is the main entry point for site generation.
+  It coordinates the building of posts, pages, and copying of static files.
+
+  ## Example
+
+      iex> Sitex.Builder.build()
+      :ok
+
+  ## Process
+
+  1. Creates the build directory
+  2. Generates all blog posts
+  3. Generates all static pages
+  4. Copies static files to the build directory
+  """
   def build do
     FileManager.create_build_dir()
     build_posts()
