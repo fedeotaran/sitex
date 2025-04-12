@@ -89,6 +89,10 @@ defmodule Sitex.Builder do
       inner_body: post.body,
       pages: pages(),
       title: post.title,
+      description: post.description,
+      author: post.author,
+      date: post.date,
+      tags: post.tags,
       posts: Blog.get_posts(),
       site_title: Config.get() |> Map.fetch!(:title)
     ]
