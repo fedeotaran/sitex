@@ -42,7 +42,7 @@ defmodule Sitex.Builder do
     for page <- pages(), do: build_page(page)
   end
 
-  def build_page(%{url: '/'} = page) do
+  def build_page(%{url: ~c"/"} = page) do
     posts = Blog.get_posts()
     inner_body = render(page.file, "md")
 
@@ -68,20 +68,26 @@ defmodule Sitex.Builder do
     FileManager.write(page.url, html)
   end
 
+  def partial(file_name, opts \\ []) do
+    [FileManager.layout_folder(), file_name]
+    |> Path.join()
+    |> EEx.eval_file(assigns: opts)
+  end
+
   defp index() do
-    Path.join([FileManager.layout_folder(), "index.html.eex"])
+    Path.join([FileManager.layout_folder(), "index.html.heex"])
   end
 
   defp post() do
-    Path.join([FileManager.layout_folder(), "post.html.eex"])
+    Path.join([FileManager.layout_folder(), "post.html.heex"])
   end
 
   defp page() do
-    Path.join([FileManager.layout_folder(), "page.html.eex"])
+    Path.join([FileManager.layout_folder(), "page.html.heex"])
   end
 
   defp layout() do
-    Path.join([FileManager.layout_folder(), "layout.html.eex"])
+    Path.join([FileManager.layout_folder(), "layout.html.heex"])
   end
 
   defp pages() do

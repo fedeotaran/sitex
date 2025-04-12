@@ -11,7 +11,7 @@ defmodule Sitex.Initializer do
 
   defp copy_config() do
     Path.join([FileManager.defaults_dir(), "sitex.yml"])
-    |> File.copy!('./sitex.yml')
+    |> File.copy!("./sitex.yml")
   end
 
   defp copy_theme() do

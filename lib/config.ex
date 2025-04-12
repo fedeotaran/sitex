@@ -15,7 +15,7 @@ defmodule Sitex.Config.Loader do
   end
 
   def load() do
-    'sitex.yml'
+    "sitex.yml"
     |> load_yml()
     |> List.flatten()
     |> to_map()
