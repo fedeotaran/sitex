@@ -5,7 +5,6 @@ defmodule Sitex.Initializer do
     copy_config()
     copy_theme()
     copy_content()
-
     update_gitignore()
   end
 
@@ -26,6 +25,7 @@ defmodule Sitex.Initializer do
 
   defp copy_content() do
     File.mkdir_p!("./content/pages")
+    File.mkdir_p!("./content/posts")
 
     Path.join([FileManager.defaults_dir(), "pages"])
     |> File.cp_r!("./content/pages")
