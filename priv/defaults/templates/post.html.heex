@@ -1,7 +1,7 @@
 <header>
   <nav>
     <ul>
-      <li><strong>Blog</strong></li>
+      <li><strong><%= @site_title %></strong></li>
     </ul>
     <ul>
       <%= for section <- @pages do %>
@@ -20,7 +20,7 @@
       </hgroup>
       <p>
         <small>
-          Por <%= @author %> | 
+          By <%= @author %> | 
           <%= @date %> 
           <%= if @tags && length(@tags) > 0 do %>
             | Tags: <%= Enum.join(@tags, ", ") %>
@@ -38,7 +38,7 @@
 <footer>
   <p>
     <small>
-      © <%= DateTime.utc_now().year %> - Todos los derechos reservados
+      © <%= DateTime.utc_now().year %> - All rights reserved
     </small>
   </p>
 </footer>

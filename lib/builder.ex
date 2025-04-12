@@ -85,7 +85,13 @@ defmodule Sitex.Builder do
       |> Path.relative_to("content/posts/")
       |> Path.rootname()
 
-    assigns = [inner_body: post.body, pages: pages(), title: post.title, posts: Blog.get_posts()]
+    assigns = [
+      inner_body: post.body,
+      pages: pages(),
+      title: post.title,
+      posts: Blog.get_posts(),
+      site_title: Config.get() |> Map.fetch!(:title)
+    ]
 
     html = post() |> render("eex", assigns)
 
@@ -101,7 +107,13 @@ defmodule Sitex.Builder do
     posts = Blog.get_posts()
     inner_body = render(page.file, "md")
 
-    assigns = [inner_body: inner_body, pages: pages(), title: page.title, posts: posts]
+    assigns = [
+      inner_body: inner_body,
+      pages: pages(),
+      title: page.title,
+      posts: posts,
+      site_title: Config.get() |> Map.fetch!(:title)
+    ]
 
     html = index() |> render("eex", assigns)
 
@@ -115,7 +127,8 @@ defmodule Sitex.Builder do
       inner_body: render(page.file, "md"),
       pages: pages(),
       title: page.title,
-      posts: posts
+      posts: posts,
+      site_title: Config.get() |> Map.fetch!(:title)
     ]
 
     html = page() |> render("eex", assigns)

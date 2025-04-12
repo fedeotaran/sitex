@@ -53,7 +53,7 @@ defmodule Sitex.Config.Loader do
 
   The YAML file should have the following basic structure:
 
-      title: "My Site"
+      title: "My Site"  # Required
       description: "Site description"
       author: "Your Name"
       pages:
@@ -66,6 +66,7 @@ defmodule Sitex.Config.Loader do
     |> load_yml()
     |> List.flatten()
     |> to_map()
+    |> validate_config()
   end
 
   defp to_map([first | _] = list) do
@@ -89,6 +90,14 @@ defmodule Sitex.Config.Loader do
   end
 
   defp to_map(value), do: value
+
+  defp validate_config(config) do
+    case Map.get(config, :title) do
+      nil -> raise "Title is required in sitex.yml configuration"
+      "" -> raise "Title cannot be empty in sitex.yml configuration"
+      _ -> config
+    end
+  end
 end
 
 defmodule Sitex.Config do
@@ -97,6 +106,12 @@ defmodule Sitex.Config do
 
   This module acts as a simple interface to access the
   configuration loaded by `Sitex.Config.Loader`.
+
+  ## Required Fields
+
+  The following fields are required in the `sitex.yml` configuration:
+
+  * `title` - The title of your site (cannot be empty)
   """
 
   @doc """
@@ -111,13 +126,17 @@ defmodule Sitex.Config do
         pages: [...]
       }
 
+  ## Required Fields
+
+  The configuration must include a non-empty `title` field.
+  If the title is missing or empty, a `RuntimeError` will be raised.
+
   ## Default Values
 
   If certain values are not defined in the configuration file,
   the following default values will be used:
 
       %{
-        title: "Sitex Site",
         description: "A static site generated with Sitex",
         author: "Sitex User",
         pages: []
