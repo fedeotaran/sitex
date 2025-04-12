@@ -1,11 +1,13 @@
-<html>
+<!DOCTYPE html>
+<html lang="es">
   <head>
-    <link
-  rel="stylesheet"
-  href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css"
-/>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.classless.min.css">
     <title><%= @title %></title>
-    <style type="text/css"><%= Sitex.Builder.code_style() %></style>
+    <style type="text/css">
+      <%= Sitex.Builder.code_style() %>
+    </style>
   </head>
   <body>
     <%= @inner_body %>

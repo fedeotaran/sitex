@@ -1,27 +1,50 @@
 <header>
-  <h1>Home</h1>
   <nav>
-    |
-    <%= for section <- @pages do %>
-      <a href="<%= "#{section.url}" %>"><%= section.title %></a>
-      |
-    <% end %>
+    <ul>
+      <li><strong>Blog</strong></li>
+    </ul>
+    <ul>
+      <%= for section <- @pages do %>
+        <li><a href="<%= "#{section.url}" %>"><%= section.title %></a></li>
+      <% end %>
+    </ul>
   </nav>
 </header>
+
 <main>
-  <%= @inner_body %>
-  <%= if length(@posts) > 0  do %>
+  <article>
+    <header>
+      <hgroup>
+        <h1>Home</h1>
+      </hgroup>
+    </header>
+
     <section>
-      <h2>Latest posts</h2>
-      <ul>
-        <%= for post <- @posts do %>
-        <li>
-          <a href="<%= "#{post.url}" %>"><%= post.date %> <strong><%= post.title %></strong></a>
-        </li>
-        <% end %>
-      </ul>
+      <%= @inner_body %>
     </section>
-  <% end %>
+
+    <%= if length(@posts) > 0  do %>
+      <section>
+        <h2>Latest posts</h2>
+        <ul>
+          <%= for post <- @posts do %>
+            <li>
+              <a href="<%= "#{post.url}" %>">
+                <time><%= post.date %></time> 
+                <strong><%= post.title %></strong>
+              </a>
+            </li>
+          <% end %>
+        </ul>
+      </section>
+    <% end %>
+  </article>
 </main>
+
 <footer>
+  <p>
+    <small>
+      © <%= DateTime.utc_now().year %> - Todos los derechos reservados
+    </small>
+  </p>
 </footer>

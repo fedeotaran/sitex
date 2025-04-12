@@ -1,0 +1,93 @@
+/* Layout */
+body {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* Article styles */
+article {
+  margin: 2rem 0;
+}
+
+article header {
+  margin-bottom: 2rem;
+}
+
+article h1 {
+  margin-bottom: 0.5rem;
+}
+
+article h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+article h3 {
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+article p {
+  margin-bottom: 1rem;
+}
+
+article ul, article ol {
+  margin-bottom: 1rem;
+}
+
+/* Code blocks */
+article pre {
+  margin: 1rem 0;
+  padding: 1rem;
+  background: var(--card-background-color);
+  border-radius: 0.25rem;
+  overflow-x: auto;
+}
+
+article code {
+  background: var(--card-background-color);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+/* Blockquotes */
+article blockquote {
+  margin: 1.5rem 0;
+  padding: 1rem;
+  border-left: 4px solid var(--primary);
+  background: var(--card-background-color);
+}
+
+/* Navigation */
+nav ul {
+  display: flex;
+  gap: 1rem;
+  padding: 0;
+  margin: 1rem 0;
+}
+
+nav ul li {
+  list-style: none;
+}
+
+/* Blog specific */
+.post-meta {
+  color: var(--muted-color);
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.post-tags {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 1rem;
+}
+
+.post-tags a {
+  background: var(--card-background-color);
+  padding: 0.2rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.8rem;
+} 
