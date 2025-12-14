@@ -9,6 +9,7 @@ defmodule Sitex.Initializer do
     copy_config(opts)
     copy_theme(opts)
     copy_content(opts)
+    copy_ci(opts)
     update_gitignore()
   end
 
@@ -51,8 +52,8 @@ defmodule Sitex.Initializer do
   end
 
   defp copy_content(opts) do
-    pages_dir = "./content/pages"
-    posts_dir = "./content/posts"
+    pages_dir = Path.join([FileManager.content_folder(), "pages"])
+    posts_dir = Path.join([FileManager.content_folder(), "posts"])
     source_pages = Path.join([FileManager.defaults_dir(), "pages"])
 
     if File.exists?(pages_dir) do
@@ -68,6 +69,23 @@ defmodule Sitex.Initializer do
       File.mkdir_p!(pages_dir)
       File.mkdir_p!(posts_dir)
       File.cp_r!(source_pages, pages_dir)
+    end
+  end
+
+  defp copy_ci(opts) do
+    ci_file = "./.github/workflows/ci.yml"
+    source_ci_file = Path.join([FileManager.defaults_dir(), "ci.yml"])
+
+    if File.exists?(ci_file) do
+      if opts[:force] ||
+           confirm_overwrite?("CI configuration file already exists. Overwrite? [y/N] ") do
+        File.copy!(source_ci_file, ci_file)
+      else
+        Logger.info("Skipping CI configuration file creation.")
+      end
+    else
+      File.mkdir_p!(Path.dirname(ci_file))
+      File.copy!(source_ci_file, ci_file)
     end
   end
 
