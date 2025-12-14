@@ -56,7 +56,7 @@ defmodule Sitex.Builder do
   defp build_post({post, file_name}) do
     url =
       file_name
-      |> Path.relative_to("content/posts/")
+      |> Path.relative_to("#{FileManager.content_folder()}/posts/")
       |> Path.rootname()
 
     assigns = [

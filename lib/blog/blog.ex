@@ -1,8 +1,10 @@
 defmodule Sitex.Blog do
+  alias Sitex.FileManager
+
   def get_entries() do
     opts = [
       build: Sitex.Blog.Post,
-      from: "./content/posts/**/*.md",
+      from: "#{FileManager.content_folder()}/posts/**/*.md",
       as: :posts,
       highlighters: []
     ]

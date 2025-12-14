@@ -25,7 +25,7 @@ defmodule Sitex.MixProject do
       {:plug_cowboy, "~> 2.6"},
       {:file_system, "~> 0.2.10"},
       {:yamerl, "~> 0.8.1"},
-      {:nimble_publisher, path: "../nimble_publisher"},
+      {:nimble_publisher, github: "fedeotaran/nimble_publisher", branch: "master"},
       {:earmark, "~> 1.4.37"}
     ]
   end
