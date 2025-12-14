@@ -107,7 +107,7 @@ defmodule Sitex.Initializer do
   end
 
   defp confirm_overwrite?(message) do
-    IO.gets(message)
+    IO.gets("#{IO.ANSI.yellow()}#{message}#{IO.ANSI.reset()}")
     |> String.trim()
     |> String.downcase()
     |> case do
