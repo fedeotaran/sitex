@@ -15,6 +15,9 @@ defmodule Sitex.Blog do
   end
 
   def get_posts() do
-    for {post, _} <- get_entries(), do: post
+    for {post, _} <- get_entries() do
+      post
+    end
+    |> Enum.sort_by(& &1.date, {:desc, Date})
   end
 end
