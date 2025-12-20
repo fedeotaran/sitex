@@ -1,7 +1,9 @@
 <header>
   <nav>
     <ul>
-      <li><strong><%= @site_title %></strong></li>
+      <li>
+        <a href="/"><strong><%= @site_title %></strong></a>
+      </li>
     </ul>
     <ul>
       <%= for section <- @pages do %>
@@ -13,12 +15,6 @@
 
 <main>
   <article>
-    <header>
-      <hgroup>
-        <h1><%= @title %></h1>
-      </hgroup>
-    </header>
-
     <section>
       <%= @inner_body %>
     </section>

@@ -1,7 +1,9 @@
 <header>
   <nav>
     <ul>
-      <li><strong><%= @site_title %></strong></li>
+      <li>
+        <a href="/"><strong><%= @site_title %></strong></a>
+      </li>
     </ul>
     <ul>
       <%= for section <- @pages do %>
@@ -15,29 +17,13 @@
   <article>
     <header>
       <hgroup>
-        <h1>Home</h1>
+        <h1><%= section.title %></h1>
       </hgroup>
     </header>
 
     <section>
       <%= @inner_body %>
     </section>
-
-    <%= if length(@posts) > 0  do %>
-      <section>
-        <h2>Latest posts</h2>
-        <ul>
-          <%= for post <- Enum.take(@posts, 5) do %>
-            <li>
-              <a href="<%= "#{post.url}" %>">
-                <time><%= post.date %></time>
-                <strong><%= post.title %></strong>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-      </section>
-    <% end %>
   </article>
 </main>
 

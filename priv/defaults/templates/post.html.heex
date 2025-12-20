@@ -1,7 +1,9 @@
 <header>
   <nav>
     <ul>
-      <li><strong><%= @site_title %></strong></li>
+      <li>
+        <a href="/"><strong><%= @site_title %></strong></a>
+      </li>
     </ul>
     <ul>
       <%= for section <- @pages do %>
@@ -20,8 +22,8 @@
       </hgroup>
       <p>
         <small>
-          By <%= @author %> | 
-          <%= @date %> 
+          By <%= @author %> |
+          <%= @date %>
           <%= if @tags && length(@tags) > 0 do %>
             | Tags: <%= Enum.join(@tags, ", ") %>
           <% end %>
