@@ -8,9 +8,14 @@ defmodule Sitex.FileManager do
     @defaults_dir
   end
 
-  def layout_folder() do
+  def theme_folder() do
     theme = Config.get() |> Map.get("theme", "default")
-    Path.join(["themes", theme, "templates"])
+    Path.join(["themes", theme])
+  end
+
+  def layout_folder() do
+    theme_folder = theme_folder()
+    Path.join([theme_folder, "templates"])
   end
 
   def content_folder() do
@@ -50,7 +55,7 @@ defmodule Sitex.FileManager do
   end
 
   defp move_favicon() do
-    Path.join([defaults_dir(), "favicon.ico"])
+    Path.join([theme_folder(), "favicon.ico"])
     |> File.cp!(Path.join([build_folder(), "favicon.ico"]))
   end
 
