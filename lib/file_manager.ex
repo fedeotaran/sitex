@@ -36,22 +36,14 @@ defmodule Sitex.FileManager do
     move_favicon()
   end
 
-  def write(_ = "/", file_content) do
-    path = url_to_path("/")
-    File.write(path, file_content)
-    path
-  end
+  def write(path, content) do
+    full_path =
+      [build_folder(), path]
+      |> Path.join()
 
-  def write(url, file_content) do
-    path = url_to_path(url)
-
-    File.mkdir_p(path)
-
-    [path, "index.html"]
-    |> Path.join()
-    |> File.write(file_content)
-
-    path
+    dir = Path.dirname(full_path)
+    File.mkdir_p!(dir)
+    File.write(full_path, content)
   end
 
   defp move_favicon() do

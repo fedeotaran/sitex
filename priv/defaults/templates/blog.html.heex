@@ -25,30 +25,21 @@
     </header>
 
     <section>
-      <%= @inner_body %>
-    </section>
-  </article>
-
-  <article>
-    <header>
-      <hgroup>
-        <h1>Latest posts</h1>
-      </hgroup>
-    </header>
     <%= if length(@posts) > 0  do %>
-      <section>
-        <ul>
-          <%= for post <- Enum.take(@posts, 5) do %>
-            <li>
-              <a href="<%= "#{post.url}" %>">
-                <time><%= post.date %></time>
-                <strong><%= post.title %></strong>
-              </a>
-            </li>
-          <% end %>
-        </ul>
-      </section>
+    <section>
+      <ul>
+        <%= for post <- @posts do %>
+          <li>
+            <a href="<%= "#{post.url}" %>">
+              <time><%= post.date %></time>
+              <strong><%= post.title %></strong>
+            </a>
+          </li>
+        <% end %>
+      </ul>
+    </section>
     <% end %>
+    </section>
   </article>
 </main>
 

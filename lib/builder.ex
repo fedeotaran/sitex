@@ -46,7 +46,26 @@ defmodule Sitex.Builder do
     FileManager.create_build_dir()
     build_posts()
     build_pages()
+    build_blog()
     FileManager.move_statics()
+  end
+
+  defp build_blog() do
+    blog = blog()
+    posts = Blog.get_posts()
+
+    assigns = [
+      pages: pages(),
+      blog: blog,
+      title: blog.title,
+      posts: Blog.get_posts(),
+      site_title: Config.get() |> Map.fetch!(:title),
+      code_theme: Config.get() |> Map.get(:code_theme, "github")
+    ]
+
+    html = blog_view() |> render("eex", assigns)
+
+    FileManager.write("blog/index.html", html)
   end
 
   defp build_posts() do
@@ -62,6 +81,7 @@ defmodule Sitex.Builder do
     assigns = [
       inner_body: post.body,
       pages: pages(),
+      blog: blog(),
       title: post.title,
       description: post.description,
       author: post.author,
@@ -72,10 +92,10 @@ defmodule Sitex.Builder do
       code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
-    html = post() |> render("eex", assigns)
+    html = post_view() |> render("eex", assigns)
+    path = Path.join(["blog", url, "index.html"])
 
-    Path.join("blog", url)
-    |> FileManager.write(html)
+    FileManager.write(path, html)
   end
 
   def build_pages() do
@@ -89,15 +109,16 @@ defmodule Sitex.Builder do
     assigns = [
       inner_body: inner_body,
       pages: pages(),
+      blog: blog(),
       title: page.title,
       posts: posts,
       site_title: Config.get() |> Map.fetch!(:title),
       code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
-    html = index() |> render("eex", assigns)
+    html = index_view() |> render("eex", assigns)
 
-    FileManager.write(page.url, html)
+    FileManager.write("index.html", html)
   end
 
   def build_page(page) do
@@ -106,41 +127,52 @@ defmodule Sitex.Builder do
     assigns = [
       inner_body: render(page.file, "md"),
       pages: pages(),
+      blog: blog(),
       title: page.title,
       posts: posts,
       site_title: Config.get() |> Map.fetch!(:title),
       code_theme: Config.get() |> Map.get(:code_theme, "github")
     ]
 
-    html = page() |> render("eex", assigns)
+    html = page_view() |> render("eex", assigns)
 
-    FileManager.write(page.url, html)
+    dir =
+      page.url
+      |> to_string()
+      |> String.split("/", trim: true)
+      |> Path.join()
+
+    path = Path.join([dir, "index.html"])
+
+    FileManager.write(path, html)
   end
 
-  def partial(file_name, opts \\ []) do
-    [FileManager.layout_folder(), file_name]
-    |> Path.join()
-    |> EEx.eval_file(assigns: opts)
-  end
-
-  defp index() do
+  defp index_view() do
     Path.join([FileManager.layout_folder(), "index.html.heex"])
   end
 
-  defp post() do
+  defp post_view() do
     Path.join([FileManager.layout_folder(), "post.html.heex"])
   end
 
-  defp page() do
+  defp page_view() do
     Path.join([FileManager.layout_folder(), "page.html.heex"])
   end
 
-  defp layout() do
+  defp layout_view() do
     Path.join([FileManager.layout_folder(), "layout.html.heex"])
+  end
+
+  defp blog_view() do
+    Path.join([FileManager.layout_folder(), "blog.html.heex"])
   end
 
   defp pages() do
     Map.fetch!(Config.get(), :pages)
+  end
+
+  defp blog() do
+    Map.fetch!(Config.get(), :blog)
   end
 
   defp render(layout, file_type, assigns \\ [])
@@ -169,7 +201,7 @@ defmodule Sitex.Builder do
 
   # Render content with base layout
   defp render_base("eex", assigns) do
-    base_layout = layout()
+    base_layout = layout_view()
 
     base_layout
     |> File.read!()

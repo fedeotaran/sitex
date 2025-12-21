@@ -7,7 +7,10 @@
     </ul>
     <ul>
       <%= for section <- @pages do %>
-        <li><a href="<%= "#{section.url}" %>"><%= section.title %></a></li>
+        <li><a href="<%= section.url %>"><%= section.title %></a></li>
+      <% end %>
+      <%= if @blog.enabled do %>
+        <li><a href="<%= @blog.url %>"><%= @blog.title %></a></li>
       <% end %>
     </ul>
   </nav>

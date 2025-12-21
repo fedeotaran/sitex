@@ -4,6 +4,10 @@ theme: "default"
 code_theme: "github"
 build_folder: "_site"
 content_folder: "content"
+blog:
+  enabled: true
+  url: "/blog"
+  title: "Blog"
 pages:
   - title: "Home"
     file: "content/pages/home.md"
