@@ -9,7 +9,7 @@ defmodule Sitex.FileManager do
   end
 
   def theme_folder() do
-    theme = Config.get() |> Map.get("theme", "default")
+    theme = Config.get() |> Map.get(:theme, "default")
     Path.join(["themes", theme])
   end
 
