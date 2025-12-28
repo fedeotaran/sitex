@@ -47,6 +47,7 @@ defmodule Sitex.Builder do
     build_posts()
     build_pages()
     build_blog()
+    build_feed()
     FileManager.move_statics()
   end
 
@@ -207,4 +208,77 @@ defmodule Sitex.Builder do
     |> File.read!()
     |> Parser.parse("eex", assigns)
   end
+
+  defp build_feed() do
+    config = Config.get()
+    posts = Blog.get_posts()
+
+    site_url = Map.get(config, :site_url, "https://example.com")
+    site_title = Map.fetch!(config, :title)
+    site_description = Map.get(config, :description, "")
+
+    xml = """
+    <?xml version="1.0" encoding="UTF-8"?>
+    <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+      <channel>
+        <title>#{escape_xml(site_title)}</title>
+        <link>#{escape_xml(site_url)}</link>
+        <description>#{escape_xml(site_description)}</description>
+        <atom:link href="#{escape_xml(site_url)}/feed.xml" rel="self" type="application/rss+xml" />
+        <language>es</language>
+    #{Enum.map_join(posts, "\n", &feed_item(&1, site_url))}
+      </channel>
+    </rss>
+    """
+
+    FileManager.write("feed.xml", xml)
+  end
+
+  defp feed_item(post, site_url) do
+    """
+        <item>
+          <title>#{escape_xml(post.title)}</title>
+          <link>#{escape_xml(site_url)}#{escape_xml(post.url)}</link>
+          <description>#{escape_xml(post.description)}</description>
+          <pubDate>#{format_rfc822_date(post.date)}</pubDate>
+          <guid>#{escape_xml(site_url)}#{escape_xml(post.url)}</guid>
+        </item>
+    """
+  end
+
+  defp format_rfc822_date(date) do
+    # Convert Date to RFC 822 format (e.g., "Mon, 01 Jan 2024 00:00:00 +0000")
+    day_names = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+
+    month_names = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+    ]
+
+    day_of_week = day_names |> Enum.at(Date.day_of_week(date) - 1)
+    month_name = month_names |> Enum.at(date.month - 1)
+
+    "#{day_of_week}, #{String.pad_leading(to_string(date.day), 2, "0")} #{month_name} #{date.year} 00:00:00 +0000"
+  end
+
+  defp escape_xml(text) when is_binary(text) do
+    text
+    |> String.replace("&", "&amp;")
+    |> String.replace("<", "&lt;")
+    |> String.replace(">", "&gt;")
+    |> String.replace("\"", "&quot;")
+    |> String.replace("'", "&apos;")
+  end
+
+  defp escape_xml(text), do: text
 end

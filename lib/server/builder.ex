@@ -10,7 +10,7 @@ defmodule Sitex.Server.Builder do
   plug(Plug.Static,
     at: "/",
     from: {FileManager, :build_folder, []},
-    only: ~w(favicon.ico index.html)
+    only: ~w(favicon.ico index.html feed.xml)
   )
 
   plug(:index)
