@@ -61,7 +61,8 @@ defmodule Sitex.Builder do
       title: blog.title,
       posts: Blog.get_posts(),
       site_title: Config.get() |> Map.fetch!(:title),
-      code_theme: Config.get() |> Map.get(:code_theme, "github")
+      code_theme: Config.get() |> Map.get(:code_theme, "github"),
+      social: social_links()
     ]
 
     html = blog_view() |> render("eex", assigns)
@@ -90,7 +91,8 @@ defmodule Sitex.Builder do
       tags: post.tags,
       posts: Blog.get_posts(),
       site_title: Config.get() |> Map.fetch!(:title),
-      code_theme: Config.get() |> Map.get(:code_theme, "github")
+      code_theme: Config.get() |> Map.get(:code_theme, "github"),
+      social: social_links()
     ]
 
     html = post_view() |> render("eex", assigns)
@@ -114,7 +116,8 @@ defmodule Sitex.Builder do
       title: page.title,
       posts: posts,
       site_title: Config.get() |> Map.fetch!(:title),
-      code_theme: Config.get() |> Map.get(:code_theme, "github")
+      code_theme: Config.get() |> Map.get(:code_theme, "github"),
+      social: social_links()
     ]
 
     html = index_view() |> render("eex", assigns)
@@ -132,7 +135,8 @@ defmodule Sitex.Builder do
       title: page.title,
       posts: posts,
       site_title: Config.get() |> Map.fetch!(:title),
-      code_theme: Config.get() |> Map.get(:code_theme, "github")
+      code_theme: Config.get() |> Map.get(:code_theme, "github"),
+      social: social_links()
     ]
 
     html = page_view() |> render("eex", assigns)
@@ -174,6 +178,18 @@ defmodule Sitex.Builder do
 
   defp blog() do
     Map.fetch!(Config.get(), :blog)
+  end
+
+  defp social_links() do
+    config = Config.get()
+
+    %{
+      email: Map.get(config, :email),
+      github: Map.get(config, :github),
+      twitter: Map.get(config, :twitter),
+      linkedin: Map.get(config, :linkedin),
+      bluesky: Map.get(config, :bluesky)
+    }
   end
 
   defp render(layout, file_type, assigns \\ [])
