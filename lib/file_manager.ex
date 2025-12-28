@@ -34,6 +34,7 @@ defmodule Sitex.FileManager do
 
   def move_statics do
     move_favicon()
+    move_static_files()
   end
 
   def write(path, content) do
@@ -49,6 +50,20 @@ defmodule Sitex.FileManager do
   defp move_favicon() do
     Path.join([theme_folder(), "favicon.ico"])
     |> File.cp!(Path.join([build_folder(), "favicon.ico"]))
+  end
+
+  defp move_static_files() do
+    static_source = Path.join([theme_folder(), "static"])
+
+    if File.exists?(static_source) do
+      # Copy each file/directory inside static/ to the build folder
+      File.ls!(static_source)
+      |> Enum.each(fn item ->
+        source_path = Path.join([static_source, item])
+        dest_path = Path.join([build_folder(), item])
+        File.cp_r!(source_path, dest_path)
+      end)
+    end
   end
 
   defp url_to_path(url) do

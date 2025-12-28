@@ -8,6 +8,7 @@ defmodule Sitex.Initializer do
     opts = Keyword.merge(@default_opts, opts)
     copy_config(opts)
     copy_theme(opts)
+    copy_static(opts)
     copy_content(opts)
     copy_ci(opts)
     update_gitignore()
@@ -48,6 +49,24 @@ defmodule Sitex.Initializer do
       File.mkdir_p!(theme_dir)
       File.cp_r!(source_dir, theme_dir)
       File.copy!(favicon_source, favicon_dest)
+    end
+  end
+
+  defp copy_static(opts) do
+    static_dir = "./themes/default/static"
+    source_dir = Path.join([FileManager.defaults_dir(), "static"])
+
+    if File.exists?(static_dir) do
+      if opts[:force] || confirm_overwrite?("Static directory already exists. Overwrite? [y/N] ") do
+        File.rm_rf!(static_dir)
+        File.mkdir_p!(static_dir)
+        File.cp_r!(source_dir, static_dir)
+      else
+        Logger.info("Skipping static directory creation.")
+      end
+    else
+      File.mkdir_p!(static_dir)
+      File.cp_r!(source_dir, static_dir)
     end
   end
 
